@@ -21,7 +21,7 @@ echo mysql-server mysql-server/root_password password "$sqlr" | sudo debconf-set
 echo mysql-server mysql-server/root_password_again password "$sqlr" | sudo debconf-set-selections;
 apt-get install mysql-server -y;
 sudo mysql_install_db;
-printf "%s\n%s\n\nn\nY\nY\nY\nY" "$sqlr" | mysql_secure_installation;
+printf "%s%s\n\nn\nY\nY\nY\nY" "$sqlr" | mysql_secure_installation;
 printf "CREATE DATABASE wordpress;\nCREATE USER wordpressuser@localhost IDENTIFIED BY '%s';\nGRANT ALL PRIVILEGES ON wordpress.* TO wordpressuser@localhost;\nFLUSH PRIVILEGES;\nexit; "$user" | mysql -u root --password="$sqlr";
 
 
