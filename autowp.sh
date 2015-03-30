@@ -16,7 +16,8 @@ sudo chown -R www-data:www-data /var/www/wordpress/;
 #install LAMP
 cd /tmp;
 apt-get update;
-apt-get install apache2 mysqlserver php5 libapache2-mod-php5 php5-mcrypt php5-mysql php5-gd libssh2-php -y;
+apt-get install apache2 -y;
+apt-get install mysql-server php5 libapache2-mod-php5 php5-mcrypt php5-mysql php5-gd libssh2-php -y;
 rm /var/www/html/index.html;
 
 #configure nginx for wordpress
