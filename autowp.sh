@@ -1,7 +1,7 @@
 #install nginx & php
 cd /tmp;
 apt-get update;
-apt-get install apache2 curl php5-fpm php5-mysql php5-gd libssh2-php -y;
+apt-get install apache2 libapache2-mod-php5 curl php5-mysql php5-gd libssh2-php -y;
 sudo apt-get remove '^nginx.*$' -y;
 cat << 'EOF' | sudo tee /etc/apt/sources.list.d/nginx.list
 deb http://nginx.org/packages/ubuntu/ trusty nginx
@@ -44,8 +44,9 @@ sudo chown -R www-data:www-data /var/www/wordpress/;
 
 #configure nginx for wordpress
 
-wget https://raw.githubusercontent.com/pl3bs/autowp/master/apache-proxy.conf; 
-mv apache-proxy /etc/nginx/conf.d/apache-proxy.conf
+wget https://raw.githubusercontent.com/pl3bs/autowp/master/apache-proxy.conf;
+mv apache-proxy.conf /etc/nginx/conf.d/apache-proxy.conf;
+
 
 #cd /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/wordpress.conf
 #mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.x
