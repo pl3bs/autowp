@@ -34,7 +34,7 @@ echo mysql-server mysql-server/root_password_again password "$sqlr" | sudo debco
 apt-get install mysql-server -y;
 sudo mysql_install_db;
 printf "%s%s\n\nn\nY\nY\nY\nY" "$sqlr" | mysql_secure_installation;
-printf "CREATE DATABASE wordpress;\nCREATE USER wordpressuser@localhost IDENTIFIED BY '%s';\nGRANT ALL PRIVILEGES ON wordpress.* TO wordpressuser@localhost;\nFLUSH PRIVILEGES;\nexit; "$user" | mysql -u root --password="$sqlr";
+printf "CREATE DATABASE wordpress;\nCREATE USER wordpressuser@localhost IDENTIFIED BY '%s';\nGRANT ALL PRIVILEGES ON wordpress.* TO wordpressuser@localhost;\nFLUSH PRIVILEGES;\nexit;" "$user" | mysql -u root --password="$sqlr";
 
 
 
@@ -42,11 +42,3 @@ printf "CREATE DATABASE wordpress;\nCREATE USER wordpressuser@localhost IDENTIFI
 
 wget https://raw.githubusercontent.com/pl3bs/autowp/master/apache-proxy.conf;
 mv apache-proxy.conf /etc/nginx/conf.d/apache-proxy.conf;
-
-
-#read -p "Enter the Domain Name of your site " domain;
-#cd /etc/nginx/conf.d;
-#sed -i "/^    server_name/ s/localhost;$/$domain;/g" wordpress.conf;
-#sed -i "/^        index  index.html/ s/;/ index.php;/g" wordpress.conf;
-#sed -i "/^        root/d"  wordpress.conf;
-#sed -i '9iroot   /var/www/wordpress;' wordpress.conf;
