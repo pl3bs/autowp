@@ -8,7 +8,8 @@ apt-get install mysql-server -y;
 sudo mysql_install_db;
 printf "%s\n\nn\nY\nY\nY\nY" "$sqlr" | mysql_secure_installation;
 read -p "Enter Wordpress Database User " user;
-printf "CREATE USER wordpressuser@localhost IDENTIFIED BY %s";\n "$user" | mysql -u root --password=$user";
+printf "CREATE USER wordpressuser@localhost IDENTIFIED BY %s";\n "$user" | mysql -u root --password="$sqlr";
+
 
 
 
