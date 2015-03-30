@@ -36,7 +36,7 @@ cd wordpress;
 cp wp-config-sample.php wp-config.php;
 sed -i "/^define('DB_NAME'/ s/database_name_here');$/wordpress');/g" wp-config.php;
 sed -i "/^define('DB_USER'/ s/username_here');$/wordpressuser');/g" wp-config.php;
-sed -i "/^define('DB_PASSWORD'/ s/password_here');$/"$user"');/g" wp-config.php;
+sed -i "/^define('DB_PASSWORD'/ s/password_here');$/$user');/g" wp-config.php;
 mkdir /var/www/wordpress;
 sudo rsync -avP ~/wordpress/ /var/www/html/;
 mkdir /var/www/wordpress/uploads;
