@@ -2,13 +2,11 @@
 
 apt-get update;
 read -p "Enter MySQL Root Password " psss;
-echo mysql-server mysql-server/root_password password Y | sudo debconf-set-selections;
-echo mysql-server mysql-server/root_password_again password Y | sudo debconf-set-selections;
+echo mysql-server mysql-server/root_password password "$psss" | sudo debconf-set-selections;
+echo mysql-server mysql-server/root_password_again password "$psss" | sudo debconf-set-selections;
 apt-get install mysql-server -y;
 sudo mysql_install_db;
-yes Y | mysql_secure_installation;
-mysql -u root --password=Y;
-
+printf "%s\n\nn\nY\nY\nY\nY'" "$psss" | mysql_secure_installation
 
 
 
