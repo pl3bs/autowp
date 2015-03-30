@@ -2,7 +2,7 @@ cd /tmp;
 wget http://wordpress.org/latest.tar.gz;
 tar xzvf latest.tar.gz;
 cd wordpress;
-read -p "Enter Wordpress Database Password " pwd;
+read -p "Enter Wordpress User Database Password " pwd;
 cp wp-config-sample.php wp-config.php;
 sed -i "/^define('DB_NAME'/ s/database_name_here');$/wordpress');/g" wp-config.php;
 sed -i "/^define('DB_USER'/ s/username_here');$/wordpressuser');/g" wp-config.php;
