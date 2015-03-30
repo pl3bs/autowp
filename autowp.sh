@@ -20,6 +20,11 @@ apt-get install apache2 libapache2-mod-php5 curl php5-mysql php5-gd libssh2-php 
 service apache2 stop;
 sudo apt-get update && sudo apt-get -y install nginx;
 
+#configure nginx for wordpress
+
+wget https://raw.githubusercontent.com/pl3bs/autowp/master/apache-proxy.conf;
+mv apache-proxy.conf /etc/nginx/conf.d/apache-proxy.conf;
+
 #install mysql automagically
 
 read -p "Enter MySQL Root Password " sqlr;
