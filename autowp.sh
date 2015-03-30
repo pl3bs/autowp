@@ -22,6 +22,7 @@ apt-get install apache2 libapache2-mod-php5 curl php5-mysql php5-gd libssh2-php 
 
 wget https://raw.githubusercontent.com/pl3bs/autowp/master/apache-proxy.conf;
 mv apache-proxy.conf /etc/nginx/conf.d/apache-proxy.conf;
+rm /etc/nginx/sites-available/default;
 
 #install mysql automagically
 
