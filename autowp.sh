@@ -13,7 +13,7 @@ mkdir /var/www/wordpress/uploads;
 sudo chown -R www-data:www-data /var/www/wordpress/;
 
 
-#install nginx & php
+#install LAMP
 cd /tmp;
 apt-get update;
 apt-get install apache2 libapache2-mod-php5 php5-mysql php5-gd libssh2-php -y;
