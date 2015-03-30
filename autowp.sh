@@ -16,13 +16,13 @@ sudo chown -R www-data:www-data /var/www/wordpress/;
 #install nginx & php
 cd /tmp;
 apt-get update;
-apt-get install apache2 libapache2-mod-php5 curl php5-mysql php5-gd libssh2-php nginx -y;
+apt-get install apache2 libapache2-mod-php5 curl php5-mysql php5-gd libssh2-php -y;
 
 #configure nginx for wordpress
 
-wget https://raw.githubusercontent.com/pl3bs/autowp/master/apache-proxy.conf;
-mv apache-proxy.conf /etc/nginx/conf.d/apache-proxy.conf;
-rm /etc/nginx/sites-available/default;
+#wget https://raw.githubusercontent.com/pl3bs/autowp/master/apache-proxy.conf;
+#mv apache-proxy.conf /etc/nginx/conf.d/apache-proxy.conf;
+#rm /etc/nginx/sites-available/default;
 
 #install mysql automagically
 
@@ -36,8 +36,3 @@ printf "%s%s\nn\nY\nY\nY\nY" "$sqlr" | mysql_secure_installation;
 printf "CREATE DATABASE wordpress;\nCREATE USER wordpressuser@localhost IDENTIFIED BY '%s';\nGRANT ALL PRIVILEGES ON wordpress.* TO wordpressuser@localhost;\nFLUSH PRIVILEGES;\nexit" "$user" | mysql -u root --password="$sqlr";
 
 
-
-#configure nginx for wordpress
-
-wget https://raw.githubusercontent.com/pl3bs/autowp/master/apache-proxy.conf;
-mv apache-proxy.conf /etc/nginx/conf.d/apache-proxy.conf;
