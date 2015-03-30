@@ -44,7 +44,7 @@ sudo chown -R www-data:www-data /var/www/wordpress/;
 
 #configure nginx for wordpress
 
-wget https://github.com/pl3bs/autowp/edit/master/apache-proxy.conf; 
+wget https://raw.githubusercontent.com/pl3bs/autowp/master/apache-proxy.conf; 
 mv apache-proxy /etc/nginx/conf.d/apache-proxy.conf
 
 #cd /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/wordpress.conf
