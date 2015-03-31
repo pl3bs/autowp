@@ -35,7 +35,8 @@ echo mysql-server mysql-server/root_password_again password "$sqlr" | sudo debco
 apt-get install mysql-server -y;
 sudo mysql_install_db;
 printf "%s%s\nn\nY\nY\nY\nY" "$sqlr" | mysql_secure_installation;
-printf "CREATE DATABASE '%s';\nCREATE USER wordpressuser@localhost IDENTIFIED BY '%s';\nGRANT ALL PRIVILEGES ON '%s'.* TO wordpressuser@localhost;\nFLUSH PRIVILEGES;\nexit" "$wp_domain" "$pwd" "$wp_domain" | mysql -u root --password="$sqlr";
+wp_sql=`echo "$wp_domain" | sed 's/\./_/g'`
+printf "CREATE DATABASE '%s';\nCREATE USER wordpressuser@localhost IDENTIFIED BY '%s';\nGRANT ALL PRIVILEGES ON '%s'.* TO wordpressuser@localhost;\nFLUSH PRIVILEGES;\nexit" "$wp_sql" "$pwd" "$wp_sql" | mysql -u root --password="$sqlr";
 
 #configure apache2
 
@@ -46,4 +47,4 @@ sed -i "/^        ServerName/ s/$/$wp_domain/g" wp_"$wp_domain".conf;
 sed -i "/^        DocumentRoot/ s/$/$wp_domain/g" wp_"$wp_domain".conf;
 a2dissite 000-default.conf;
 a2ensite wp_"$wp_domain".conf;
-
+service apache2 reload;
