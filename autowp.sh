@@ -16,14 +16,15 @@ sudo chown -R www-data:www-data /var/www/html/;
 cd /tmp;
 apt-get update;
 apt-get install apache2 -y;
-apt-get install nano php5 libapache2-mod-php5 php5-mcrypt php5-mysql php5-gd libssh2-php -y;
+service apache2 stop;
+apt-get install nano nginx php5 libapache2-mod-php5 php5-mcrypt php5-mysql php5-gd libssh2-php -y;
 rm /var/www/html/index.html;
 
 #configure nginx for wordpress
 
-#wget https://raw.githubusercontent.com/pl3bs/autowp/master/apache-proxy.conf;
-#mv apache-proxy.conf /etc/nginx/conf.d/apache-proxy.conf;
-#rm /etc/nginx/sites-available/default;
+wget https://raw.githubusercontent.com/pl3bs/autowp/master/apache-proxy.conf;
+mv apache-proxy.conf /etc/nginx/conf.d/apache-proxy.conf;
+rm /etc/nginx/sites-available/default;
 
 #install mysql automagically
 
