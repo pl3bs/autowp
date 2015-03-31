@@ -36,7 +36,7 @@ apt-get install mysql-server -y;
 sudo mysql_install_db;
 printf "%s%s\nn\nY\nY\nY\nY" "$sqlr" | mysql_secure_installation;
 wp_sql=`echo "$wp_domain" | sed 's/\./_/g'`
-printf "CREATE DATABASE '%s';\nCREATE USER wordpressuser@localhost IDENTIFIED BY '%s';\nGRANT ALL PRIVILEGES ON '%s'.* TO wordpressuser@localhost;\nFLUSH PRIVILEGES;\nexit" "$wp_sql" "$pwd" "$wp_sql" | mysql -u root --password="$sqlr";
+printf "CREATE DATABASE %s;\nCREATE USER wordpressuser@localhost IDENTIFIED BY '%s';\nGRANT ALL PRIVILEGES ON %s.* TO wordpressuser@localhost;\nFLUSH PRIVILEGES;\nexit" "$wp_sql" "$pwd" "$wp_sql" | mysql -u root --password="$sqlr";
 
 #configure apache2
 
