@@ -2,11 +2,11 @@ cd /tmp;
 wget http://wordpress.org/latest.tar.gz;
 tar xzvf latest.tar.gz;
 cd wordpress;
-read -p "Enter Wordpress User Database Password " pwd;
+#read -p "Enter Wordpress User Database Password " pwd;
 cp wp-config-sample.php wp-config.php;
-sed -i "/^define('DB_NAME'/ s/database_name_here');$/wordpress');/g" wp-config.php;
-sed -i "/^define('DB_USER'/ s/username_here');$/wordpressuser');/g" wp-config.php;
-sed -i "/^define('DB_PASSWORD'/ s/password_here');$/"$pwd");/g" wp-config.php;
+#sed -i "/^define('DB_NAME'/ s/database_name_here');$/wordpress');/g" wp-config.php;
+#sed -i "/^define('DB_USER'/ s/username_here');$/wordpressuser');/g" wp-config.php;
+#sed -i "/^define('DB_PASSWORD'/ s/password_here');$/"$pwd");/g" wp-config.php;
 mkdir /var/www/wordpress;
 sudo rsync -avP /tmp/wordpress/ /var/www/wordpress;
 mkdir /var/www/wordpress/uploads;
@@ -35,11 +35,11 @@ service apache2 reload;
 
 read -p "Enter MySQL Root Password " sqlr;
 #read -p "Enter Wordpress Database User " user;
-echo mysql-server mysql-server/root_password password "$sqlr" | sudo debconf-set-selections;
-echo mysql-server mysql-server/root_password_again password "$sqlr" | sudo debconf-set-selections;
+#echo mysql-server mysql-server/root_password password "$sqlr" | sudo debconf-set-selections;
+#echo mysql-server mysql-server/root_password_again password "$sqlr" | sudo debconf-set-selections;
 apt-get install mysql-server -y;
 sudo mysql_install_db;
-printf "%s%s\nn\nY\nY\nY\nY" "$sqlr" | mysql_secure_installation;
-printf "CREATE DATABASE wordpress;\nCREATE USER wordpressuser@localhost IDENTIFIED BY '%s';\nGRANT ALL PRIVILEGES ON wordpress.* TO wordpressuser@localhost;\nFLUSH PRIVILEGES;\nexit" "$pwd" | mysql -u root --password="$sqlr";
+#printf "%s%s\nn\nY\nY\nY\nY" "$sqlr" | mysql_secure_installation;
+#printf "CREATE DATABASE wordpress;\nCREATE USER wordpressuser@localhost IDENTIFIED BY '%s';\nGRANT ALL PRIVILEGES ON wordpress.* TO wordpressuser@localhost;\nFLUSH PRIVILEGES;\nexit" "$pwd" | mysql -u root --password="$sqlr";
 
 
