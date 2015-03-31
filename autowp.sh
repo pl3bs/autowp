@@ -7,10 +7,10 @@ cp wp-config-sample.php wp-config.php;
 #sed -i "/^define('DB_NAME'/ s/database_name_here');$/wordpress');/g" wp-config.php;
 #sed -i "/^define('DB_USER'/ s/username_here');$/wordpressuser');/g" wp-config.php;
 #sed -i "/^define('DB_PASSWORD'/ s/password_here');$/"$pwd");/g" wp-config.php;
-mkdir /var/www/wordpress;
-sudo rsync -avP /tmp/wordpress/ /var/www/wordpress;
-mkdir /var/www/wordpress/uploads;
-sudo chown -R www-data:www-data /var/www/wordpress/;
+mkdir /var/www/html/wordpress;
+sudo rsync -avP /tmp/wordpress/ /var/www/html/wordpress;
+mkdir /var/www/wordpress/html/uploads;
+sudo chown -R www-data:www-data /var/www/html/wordpress/;
 
 
 #install LAMP
