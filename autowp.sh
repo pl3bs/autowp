@@ -1,3 +1,19 @@
+#generate random user
+
+if [ -n "$1" ]  #  If command-line argument present,
+then            #+ then set start-string to it.
+  str0="$1"
+else            #  Else use PID of script as start-string.
+  str0="$$"
+fi
+
+POS=2  # Starting from position 2 in the string.
+LEN=8  # Extract eight characters.
+
+str1=$( echo "$str0" | md5sum | md5sum )
+
+ring="${str1:$POS:$LEN}"
+
 cd /tmp;
 wget http://wordpress.org/latest.tar.gz;
 tar xzvf latest.tar.gz;
@@ -8,7 +24,7 @@ read -p "Enter Wordpress Database Password " pwd;
 cp wp-config-sample.php wp-config.php;
 wp_sql=`echo "$wp_domain" | sed 's/\./_/g'`
 sed -i "/^define('DB_NAME'/ s/database_name_here');$/"$wp_sql"');/g" wp-config.php;
-sed -i "/^define('DB_USER'/ s/username_here');$/"$wp_sql"user');/g" wp-config.php;
+sed -i "/^define('DB_USER'/ s/username_here');$/"$ring"');/g" wp-config.php;
 sed -i "/^define('DB_PASSWORD'/ s/password_here');$/"$pwd"');/g" wp-config.php;
 sudo rsync -avP /tmp/wordpress/ /var/www/"$wp_domain"/;
 mkdir /var/www/"$wp_domain"/uploads;
@@ -35,7 +51,7 @@ echo mysql-server mysql-server/root_password_again password "$sqlr" | sudo debco
 apt-get install mysql-server -y;
 sudo mysql_install_db;
 printf "%s%s\nn\nY\nY\nY\nY" "$sqlr" | mysql_secure_installation;
-printf "CREATE DATABASE %s;\nCREATE USER %suser@localhost IDENTIFIED BY '%s';\nGRANT ALL PRIVILEGES ON %s.* TO %suser@localhost;\nFLUSH PRIVILEGES;\nexit" "$wp_sql" "$wp_sql" "$pwd" "$wp_sql" "$wp_sql" | mysql -u root --password="$sqlr";
+printf "CREATE DATABASE %s;\nCREATE USER %s@localhost IDENTIFIED BY '%s';\nGRANT ALL PRIVILEGES ON %s.* TO %suser@localhost;\nFLUSH PRIVILEGES;\nexit" "$wp_sql" "$ring" "$pwd" "$wp_sql" "$wp_sql" | mysql -u root --password="$sqlr";
 
 #configure apache2
 
