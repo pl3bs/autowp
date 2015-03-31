@@ -19,6 +19,7 @@ apt-get update;
 apt-get install apache2 -y;
 apt-get install nano php5 libapache2-mod-php5 php5-mcrypt php5-mysql php5-gd libssh2-php -y;
 rm /var/www/html/index.html;
+cd /etc/apache2/sites-available
 cp 000-default.conf wordpress.conf;
 a2ensite wordpress.conf;
 service apache2 reload;
