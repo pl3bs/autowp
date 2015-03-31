@@ -7,10 +7,9 @@ cp wp-config-sample.php wp-config.php;
 sed -i "/^define('DB_NAME'/ s/database_name_here');$/wordpress');/g" wp-config.php;
 sed -i "/^define('DB_USER'/ s/username_here');$/wordpressuser');/g" wp-config.php;
 sed -i "/^define('DB_PASSWORD'/ s/password_here');$/"$pwd");/g" wp-config.php;
-mkdir /var/www/html/wordpress;
-sudo rsync -avP /tmp/wordpress/ /var/www/html/wordpress;
-mkdir /var/www/wordpress/html/uploads;
-sudo chown -R www-data:www-data /var/www/html/wordpress/;
+sudo rsync -avP /tmp/wordpress/ /var/www/html/;
+mkdir /var/www//html/uploads;
+sudo chown -R www-data:www-data /var/www/html/;
 
 
 #install LAMP
@@ -19,11 +18,6 @@ apt-get update;
 apt-get install apache2 -y;
 apt-get install nano php5 libapache2-mod-php5 php5-mcrypt php5-mysql php5-gd libssh2-php -y;
 rm /var/www/html/index.html;
-cd /etc/apache2/sites-available
-cp 000-default.conf wordpress.conf;
-a2ensite wordpress.conf;
-service apache2 reload;
-
 
 #configure nginx for wordpress
 
