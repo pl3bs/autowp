@@ -6,7 +6,8 @@ read -p "Enter MySQL Root Password " sqlr;
 read -p "Enter Wordpress Domain Name (omit www.) " wp_domain;
 read -p "Enter Wordpress Database Password " pwd;
 cp wp-config-sample.php wp-config.php;
-sed -i "/^define('DB_NAME'/ s/database_name_here');$/"$wp_domain"');/g" wp-config.php;
+wp_sql=`echo "$wp_domain" | sed 's/\./_/g'`
+sed -i "/^define('DB_NAME'/ s/database_name_here');$/"$wp_sql"');/g" wp-config.php;
 sed -i "/^define('DB_USER'/ s/username_here');$/wordpressuser');/g" wp-config.php;
 sed -i "/^define('DB_PASSWORD'/ s/password_here');$/"$pwd"');/g" wp-config.php;
 sudo rsync -avP /tmp/wordpress/ /var/www/"$wp_domain"/;
@@ -35,7 +36,6 @@ echo mysql-server mysql-server/root_password_again password "$sqlr" | sudo debco
 apt-get install mysql-server -y;
 sudo mysql_install_db;
 printf "%s%s\nn\nY\nY\nY\nY" "$sqlr" | mysql_secure_installation;
-wp_sql=`echo "$wp_domain" | sed 's/\./_/g'`
 printf "CREATE DATABASE %s;\nCREATE USER wordpressuser@localhost IDENTIFIED BY '%s';\nGRANT ALL PRIVILEGES ON %s.* TO wordpressuser@localhost;\nFLUSH PRIVILEGES;\nexit" "$wp_sql" "$pwd" "$wp_sql" | mysql -u root --password="$sqlr";
 
 #configure apache2
