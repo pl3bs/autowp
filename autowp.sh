@@ -30,7 +30,6 @@ rm /var/www/html/index.html;
 
 #install mysql automagically
 
-#read -p "Enter Wordpress Database User " user;
 echo mysql-server mysql-server/root_password password "$sqlr" | sudo debconf-set-selections;
 echo mysql-server mysql-server/root_password_again password "$sqlr" | sudo debconf-set-selections;
 apt-get install mysql-server -y;
@@ -48,4 +47,4 @@ sed -i "/^        DocumentRoot/ s/$/$wp_domain/g" wp_"$wp_domain".conf;
 a2dissite 000-default.conf;
 a2ensite wp_"$wp_domain".conf;
 service apache2 reload;
-read -p "Visit "$wp_domain" to Finalize your Installation. Press [Enter] after you've finished the Web Install. ";
+#read -p "Visit "$wp_domain" to Finalize your Installation. Press [Enter] after you've finished the Web Install. ";
