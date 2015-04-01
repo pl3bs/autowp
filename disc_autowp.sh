@@ -20,6 +20,7 @@ sudo chown -R www-data:www-data /var/www/;
 
 
 #install LAMP
+service nginx stop;
 cd /tmp;
 apt-get update;
 apt-get install apache2 -y;
@@ -43,7 +44,9 @@ printf "CREATE DATABASE %s;\nCREATE USER %suser@localhost IDENTIFIED BY '%s';\nG
 
 #configure apache2
 
-cd /etc/apache2/sites-available
+cd /etc/apache2/
+sed -i "/^Listen 80/ s/$/11/g" ports.conf;
+cd sites-available/
 wget https://raw.githubusercontent.com/pl3bs/autowp/testing/disc_apache-sample.conf
 mv disc_apache-sample.conf wp_"$wp_domain".conf
 sed -i "/^        ServerName/ s/$/$wp_domain/g" wp_"$wp_domain".conf;
