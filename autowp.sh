@@ -9,7 +9,7 @@ read -p "Enter Wordpress Domain Name (omit www.) " wp_domain;
 read -p "Enter Wordpress Database Password " pwd;
 cp wp-config-sample.php wp-config.php;
 wp_sql=`echo "$wp_domain" | sed 's/\./_/g'`;
-ring=`echo ${wp_domain: -12}`;
+ring=`echo ${wp_sql: -12}`;
 
 sed -i "/^define('DB_NAME'/ s/database_name_here');$/"$ring"');/g" wp-config.php;
 sed -i "/^define('DB_USER'/ s/username_here');$/"$ring"user');/g" wp-config.php;
