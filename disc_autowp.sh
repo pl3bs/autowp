@@ -28,7 +28,7 @@ rm /var/www/html/index.html;
 
 #configure nginx for wordpress
 
-wget https://raw.githubusercontent.com/pl3bs/autowp/testing/disc_apache-proxy.conf;
+wget https://raw.githubusercontent.com/pl3bs/autowp/testing/apache-proxy.conf;
 mv apache-proxy.conf /etc/nginx/conf.d/apache-proxy.conf;
 rm /etc/nginx/conf.d/000-default.conf;
 
