@@ -29,7 +29,7 @@ rm /var/www/html/index.html;
 #configure nginx for wordpress
 
 wget https://raw.githubusercontent.com/pl3bs/autowp/testing/disc_apache-proxy.conf;
-mv disc_apache-proxy.conf /etc/nginx/conf.d/apache-proxy.conf;
+mv apache-proxy.conf /etc/nginx/conf.d/apache-proxy.conf;
 rm /etc/nginx/conf.d/000-default.conf;
 
 #install mysql automagically
@@ -44,8 +44,8 @@ printf "CREATE DATABASE %s;\nCREATE USER %suser@localhost IDENTIFIED BY '%s';\nG
 #configure apache2
 
 cd /etc/apache2/sites-available
-wget https://raw.githubusercontent.com/pl3bs/autowp/master/apache-sample.conf
-mv apache-sample.conf wp_"$wp_domain".conf
+wget https://raw.githubusercontent.com/pl3bs/autowp/testing/disc_apache-sample.conf
+mv disc_apache-sample.conf wp_"$wp_domain".conf
 sed -i "/^        ServerName/ s/$/$wp_domain/g" wp_"$wp_domain".conf;
 sed -i "/^        DocumentRoot/ s/$/$wp_domain/g" wp_"$wp_domain".conf;
 a2dissite 000-default.conf;
