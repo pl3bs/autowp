@@ -46,12 +46,12 @@ printf "CREATE DATABASE %s;\nCREATE USER %suser@localhost IDENTIFIED BY '%s';\nG
 
 cd /etc/apache2/
 sed -i "/^Listen 80/ s/$/11/g" ports.conf;
-cd sites-available/
-wget https://raw.githubusercontent.com/pl3bs/autowp/testing/disc_apache-sample.conf
+cd sites-available/;
+wget https://raw.githubusercontent.com/pl3bs/autowp/testing/disc_apache-sample.conf;
 mv disc_apache-sample.conf wp_"$wp_domain".conf
-sed -i "/^        ServerName/ s/$/$wp_domain/g" wp_"$wp_domain".conf;
-sed -i "/^        DocumentRoot/ s/$/$wp_domain/g" wp_"$wp_domain".conf;
+sed -i "/ServerName/ s/$/$wp_domain/g" wp_"$wp_domain".conf;
+sed -i "/DocumentRoot/ s/$/$wp_domain/g" wp_"$wp_domain".conf;
 a2dissite 000-default.conf;
 a2ensite wp_"$wp_domain".conf;
 service apache2 reload;
-#read -p "Visit "$wp_domain" to Finalize your Installation. Press [Enter] after you've finished the Web Install. ";
+
