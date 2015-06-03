@@ -1,7 +1,7 @@
 
 
 cd /tmp;
-wget http://wordpress.org/latest.tar.gz;
+wget --no-check-certificate http://wordpress.org/latest.tar.gz;
 tar xzvf latest.tar.gz;
 cd wordpress;
 read -p "Enter MySQL Root Password " sqlr;
